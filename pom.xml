@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>eu.ehri</groupId>
-  <artifactId>addpath</artifactId>
+  <artifactId>add_paths_to_ead_nodes</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>addpath</name>
+  <name>add_paths_to_ead_nodes</name>
   <url>http://maven.apache.org</url>
 
   <properties>
