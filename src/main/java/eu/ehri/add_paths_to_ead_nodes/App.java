@@ -14,6 +14,12 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.XMLEvent;
 
 
+/**
+* Add a path to each node of an EAD tree
+*
+* @author Kepa J. Rodriguez (https://github.com/KepaJRodriguez)
+*/
+
 public class App {
 	public static void main(String[] args) throws XMLStreamException,
 			FactoryConfigurationError, IOException {
@@ -30,7 +36,8 @@ public class App {
 
 		XMLEvent end = eventFactory.createDTD("\n");
 
-		int cntC01 = 0;
+		String top = "0";
+		int cntC01 = -1;
 		int cntC02 = 0;
 		int cntC03 = 0;
 		int cntC04 = 0;
@@ -54,7 +61,7 @@ public class App {
 							"unitid"));
 					writer.add(eventFactory.createAttribute("label",
 							"ehri_structure"));
-					writer.add(eventFactory.createCharacters("1"));
+					writer.add(eventFactory.createCharacters(top));
 					writer.add(eventFactory
 							.createEndElement("", null, "unitid"));
 					writer.add(end);
@@ -70,24 +77,25 @@ public class App {
 					writer.add(eventFactory.createAttribute("label",
 							"ehri_structure"));
 					writer.add(eventFactory
-							.createCharacters("0" + "." + cntC01));
+							.createCharacters(top + "." + cntC01));
 					writer.add(eventFactory
 							.createEndElement("", null, "unitid"));
 					event = xmlEventReaderEAD1.nextEvent();
 					writer.add(end);
+					
 
 				}
 
 			}
 			if (event.isStartElement()) {
 				if (event.asStartElement().getName().getLocalPart()
-						.equals("c02")) {
+						.equals("c02")) {					
 					writer.add(end);
 					writer.add(eventFactory.createStartElement("", null,
 							"unitid"));
 					writer.add(eventFactory.createAttribute("label",
 							"ehri_structure"));
-					writer.add(eventFactory.createCharacters("0" + "." + cntC01
+					writer.add(eventFactory.createCharacters(top + "." + cntC01
 							+ "." + cntC02));
 					writer.add(eventFactory
 							.createEndElement("", null, "unitid"));
@@ -99,18 +107,17 @@ public class App {
 			if (event.isStartElement()) {
 				if (event.asStartElement().getName().getLocalPart()
 						.equals("c03")) {
-					cntC03++;
 					writer.add(end);
 					writer.add(eventFactory.createStartElement("", null,
 							"unitid"));
 					writer.add(eventFactory.createAttribute("label",
 							"ehri_structure"));
-					writer.add(eventFactory.createCharacters("0" + "." + cntC01
+					writer.add(eventFactory.createCharacters(top + "." + cntC01
 							+ "." + cntC02 + "." + cntC03));
 					writer.add(eventFactory
 							.createEndElement("", null, "unitid"));
 					writer.add(end);
-
+					cntC03++;
 				}
 			}
 			if (event.isStartElement()) {
@@ -122,7 +129,7 @@ public class App {
 							"unitid"));
 					writer.add(eventFactory.createAttribute("label",
 							"ehri_structure"));
-					writer.add(eventFactory.createCharacters("0" + "." + cntC01
+					writer.add(eventFactory.createCharacters(top + "." + cntC01
 							+ "." + cntC02 + "." + cntC03 + "." + cntC04));
 					writer.add(eventFactory
 							.createEndElement("", null, "unitid"));
@@ -140,7 +147,7 @@ public class App {
 							"unitid"));
 					writer.add(eventFactory.createAttribute("label",
 							"ehri_structure"));
-					writer.add(eventFactory.createCharacters("0" + "." + cntC01
+					writer.add(eventFactory.createCharacters(top + "." + cntC01
 							+ "." + cntC02 + "." + cntC03 + "." + cntC04 + "."
 							+ cntC05));
 					writer.add(eventFactory
@@ -158,7 +165,7 @@ public class App {
 							"unitid"));
 					writer.add(eventFactory.createAttribute("label",
 							"ehri_structure"));
-					writer.add(eventFactory.createCharacters("0" + "." + cntC01
+					writer.add(eventFactory.createCharacters(top + "." + cntC01
 							+ "." + cntC02 + "." + cntC03 + "." + cntC04 + "."
 							+ cntC05 + "." + cntC06));
 					writer.add(eventFactory
@@ -176,7 +183,7 @@ public class App {
 							"unitid"));
 					writer.add(eventFactory.createAttribute("label",
 							"ehri_structure"));
-					writer.add(eventFactory.createCharacters("0" + "." + cntC01
+					writer.add(eventFactory.createCharacters(top + "." + cntC01
 							+ "." + cntC02 + "." + cntC03 + "." + cntC04 + "."
 							+ cntC05 + "." + cntC06 + "." + cntC07));
 					writer.add(eventFactory
@@ -194,7 +201,7 @@ public class App {
 							"unitid"));
 					writer.add(eventFactory.createAttribute("label",
 							"ehri_structure"));
-					writer.add(eventFactory.createCharacters("0" + "." + cntC01
+					writer.add(eventFactory.createCharacters(top + "." + cntC01
 							+ "." + cntC02 + "." + cntC03 + "." + cntC04 + "."
 							+ cntC05 + "." + cntC06 + "." + cntC07 + "."
 							+ cntC08));
@@ -213,7 +220,7 @@ public class App {
 							"unitid"));
 					writer.add(eventFactory.createAttribute("label",
 							"ehri_structure"));
-					writer.add(eventFactory.createCharacters("0" + "." + cntC01
+					writer.add(eventFactory.createCharacters(top + "." + cntC01
 							+ "." + cntC02 + "." + cntC03 + "." + cntC04 + "."
 							+ cntC05 + "." + cntC06 + "." + cntC07 + "."
 							+ cntC08 + "." + cntC09));
@@ -232,7 +239,7 @@ public class App {
 							"unitid"));
 					writer.add(eventFactory.createAttribute("label",
 							"ehri_structure"));
-					writer.add(eventFactory.createCharacters("0" + "." + cntC01
+					writer.add(eventFactory.createCharacters(top + "." + cntC01
 							+ "." + cntC02 + "." + cntC03 + "." + cntC04 + "."
 							+ cntC05 + "." + cntC06 + "." + cntC07 + "."
 							+ cntC08 + "." + cntC09 + "." + cntC10));
@@ -251,7 +258,7 @@ public class App {
 							"unitid"));
 					writer.add(eventFactory.createAttribute("label",
 							"ehri_structure"));
-					writer.add(eventFactory.createCharacters("0" + "." + cntC01
+					writer.add(eventFactory.createCharacters(top + "." + cntC01
 							+ "." + cntC02 + "." + cntC03 + "." + cntC04 + "."
 							+ cntC05 + "." + cntC06 + "." + cntC07 + "."
 							+ cntC08 + "." + cntC09 + "." + cntC10 + "."
@@ -271,7 +278,7 @@ public class App {
 							"unitid"));
 					writer.add(eventFactory.createAttribute("label",
 							"ehri_structure"));
-					writer.add(eventFactory.createCharacters("0" + "." + cntC01
+					writer.add(eventFactory.createCharacters(top + "." + cntC01
 							+ "." + cntC02 + "." + cntC03 + "." + cntC04 + "."
 							+ cntC05 + "." + cntC06 + "." + cntC07 + "."
 							+ cntC08 + "." + cntC09 + "." + cntC10 + "."
