@@ -3,11 +3,12 @@ add_paths_to_ead_nodes
 
 Add a path to each node of a EAD document
 
-Use:
+
+**Installation**
+
 Clone the app in a directory
 
 ```
-
   $ git clone https://github.com/KepaJRodriguez/add-paths-to-ead-nodes
 ```
 
@@ -23,9 +24,13 @@ You will find the jar file **add_paths_to_ead_nodes-0.0.1-SNAPSHOT-jar-with-depe
 *target* directory
 
 
+**Use**
 
+```
+java -jar add_paths_to_ead_nodes-0.0.1-SNAPSHOT-jar-with-dependencies.jar eadfile.xml
+```
 
-
+As output you will get a file called *eadfile_wpaths.xml*
 
 
 
