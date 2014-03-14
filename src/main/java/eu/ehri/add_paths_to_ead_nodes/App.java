@@ -82,8 +82,6 @@ public class App {
 							.createEndElement("", null, "unitid"));
 					event = xmlEventReaderEAD1.nextEvent();
 					writer.add(end);
-					
-
 				}
 
 			}
@@ -123,7 +121,6 @@ public class App {
 			if (event.isStartElement()) {
 				if (event.asStartElement().getName().getLocalPart()
 						.equals("c04")) {
-					cntC04++;
 					writer.add(end);
 					writer.add(eventFactory.createStartElement("", null,
 							"unitid"));
@@ -134,14 +131,13 @@ public class App {
 					writer.add(eventFactory
 							.createEndElement("", null, "unitid"));
 					writer.add(end);
-
+					cntC04++;
 				}
 			}
 
 			if (event.isStartElement()) {
 				if (event.asStartElement().getName().getLocalPart()
 						.equals("c05")) {
-					cntC05++;
 					writer.add(end);
 					writer.add(eventFactory.createStartElement("", null,
 							"unitid"));
@@ -153,13 +149,12 @@ public class App {
 					writer.add(eventFactory
 							.createEndElement("", null, "unitid"));
 					writer.add(end);
-
+					cntC05++;
 				}
 			}
 			if (event.isStartElement()) {
 				if (event.asStartElement().getName().getLocalPart()
 						.equals("c06")) {
-					cntC06++;
 					writer.add(end);
 					writer.add(eventFactory.createStartElement("", null,
 							"unitid"));
@@ -171,13 +166,12 @@ public class App {
 					writer.add(eventFactory
 							.createEndElement("", null, "unitid"));
 					writer.add(end);
-
+					cntC06++;
 				}
 			}
 			if (event.isStartElement()) {
 				if (event.asStartElement().getName().getLocalPart()
 						.equals("c07")) {
-					cntC07++;
 					writer.add(end);
 					writer.add(eventFactory.createStartElement("", null,
 							"unitid"));
@@ -189,13 +183,12 @@ public class App {
 					writer.add(eventFactory
 							.createEndElement("", null, "unitid"));
 					writer.add(end);
-
+					cntC07++;
 				}
 			}
 			if (event.isStartElement()) {
 				if (event.asStartElement().getName().getLocalPart()
 						.equals("c08")) {
-					cntC08++;
 					writer.add(end);
 					writer.add(eventFactory.createStartElement("", null,
 							"unitid"));
@@ -208,13 +201,12 @@ public class App {
 					writer.add(eventFactory
 							.createEndElement("", null, "unitid"));
 					writer.add(end);
-
+					cntC08++;
 				}
 			}
 			if (event.isStartElement()) {
 				if (event.asStartElement().getName().getLocalPart()
 						.equals("c09")) {
-					cntC09++;
 					writer.add(end);
 					writer.add(eventFactory.createStartElement("", null,
 							"unitid"));
@@ -227,13 +219,12 @@ public class App {
 					writer.add(eventFactory
 							.createEndElement("", null, "unitid"));
 					writer.add(end);
-
+					cntC09++;
 				}
 			}
 			if (event.isStartElement()) {
 				if (event.asStartElement().getName().getLocalPart()
 						.equals("c10")) {
-					cntC09++;
 					writer.add(end);
 					writer.add(eventFactory.createStartElement("", null,
 							"unitid"));
@@ -246,13 +237,12 @@ public class App {
 					writer.add(eventFactory
 							.createEndElement("", null, "unitid"));
 					writer.add(end);
-
+					cntC10++;
 				}
 			}
 			if (event.isStartElement()) {
 				if (event.asStartElement().getName().getLocalPart()
 						.equals("c11")) {
-					cntC09++;
 					writer.add(end);
 					writer.add(eventFactory.createStartElement("", null,
 							"unitid"));
@@ -266,13 +256,12 @@ public class App {
 					writer.add(eventFactory
 							.createEndElement("", null, "unitid"));
 					writer.add(end);
-
+					cntC11++;
 				}
 			}
 			if (event.isStartElement()) {
 				if (event.asStartElement().getName().getLocalPart()
 						.equals("c12")) {
-					cntC09++;
 					writer.add(end);
 					writer.add(eventFactory.createStartElement("", null,
 							"unitid"));
@@ -286,7 +275,7 @@ public class App {
 					writer.add(eventFactory
 							.createEndElement("", null, "unitid"));
 					writer.add(end);
-
+					cntC12++;
 				}
 			}
 
