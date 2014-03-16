@@ -50,6 +50,8 @@ public class App {
 		int cntC10 = -1;
 		int cntC11 = -1;
 		int cntC12 = -1;
+		String stop = "no";
+		String head = "no";
 
 		while (xmlEventReaderEAD1.hasNext()) {
 			XMLEvent event = xmlEventReaderEAD1.nextEvent();
@@ -146,18 +148,57 @@ public class App {
 					cntC12++;
 				}
 			}
+			if (event.isEndElement()) {
+				if (event.asEndElement().getName().getLocalPart().equals("did")) {
+					stop = "yes";
+				}
+			}
 
 			if (event.isStartElement()) {
 				if (event.asStartElement().getName().getLocalPart()
-						.equals("did")) {
+						.equals("archdesc")) {
+					event =  xmlEventReaderEAD1.nextEvent();
+					if (event.isStartElement()) {
+					if (!event.asStartElement().getName().getLocalPart()
+					.equals("head")) {
+						writer.add(end);
+						writer.add(eventFactory.createStartElement("", null,
+								"unitid"));
+						writer.add(eventFactory.createAttribute("label",
+								"ehri_structure"));
+						writer.add(eventFactory.createCharacters(top));
+						writer.add(eventFactory.createEndElement("", null,
+								"unitid"));
+					}
+					}
+				}
+			}
+
+			if (event.isEndElement()) {
+				if (event.asEndElement().getName().getLocalPart()
+						.equals("head")) {
+					if (node.equals("topnode") && stop.equals("no")) {
+						head = "yes";
+						writer.add(end);
+						writer.add(eventFactory.createStartElement("", null,
+								"unitid"));
+						writer.add(eventFactory.createAttribute("label",
+								"ehri_structure"));
+						writer.add(eventFactory.createCharacters(top));
+						writer.add(eventFactory.createEndElement("", null,
+								"unitid"));
+					}
+				}
+			}
+			if (event.isStartElement()) {
+				if (event.asStartElement().getName().getLocalPart()
+						.equals("did")
+						&& !node.equals("topnode")) {
 					writer.add(end);
 					writer.add(eventFactory.createStartElement("", null,
 							"unitid"));
 					writer.add(eventFactory.createAttribute("label",
 							"ehri_structure"));
-					if (node.equals("topnode")) {
-						writer.add(eventFactory.createCharacters(top));
-					}
 					if (node.equals("c01")) {
 						writer.add(eventFactory.createCharacters(top + "."
 								+ cntC01));
@@ -167,59 +208,62 @@ public class App {
 								+ cntC01 + "." + cntC02));
 					}
 					if (node.equals("c03")) {
-						writer.add(eventFactory.createCharacters(top + "." + cntC01
-								+ "." + cntC02 + "." + cntC03));
+						writer.add(eventFactory.createCharacters(top + "."
+								+ cntC01 + "." + cntC02 + "." + cntC03));
 					}
 					if (node.equals("c04")) {
-						writer.add(eventFactory.createCharacters(top + "." + cntC01
-								+ "." + cntC02 + "." + cntC03 + "." + cntC04));
+						writer.add(eventFactory.createCharacters(top + "."
+								+ cntC01 + "." + cntC02 + "." + cntC03 + "."
+								+ cntC04));
 					}
 					if (node.equals("c05")) {
-						writer.add(eventFactory.createCharacters(top + "." + cntC01
-								+ "." + cntC02 + "." + cntC03 + "." + cntC04 + "."
-								+ cntC05));
+						writer.add(eventFactory.createCharacters(top + "."
+								+ cntC01 + "." + cntC02 + "." + cntC03 + "."
+								+ cntC04 + "." + cntC05));
 					}
 					if (node.equals("c06")) {
-						writer.add(eventFactory.createCharacters(top + "." + cntC01
-								+ "." + cntC02 + "." + cntC03 + "." + cntC04 + "."
-								+ cntC05 + "." + cntC06));
+						writer.add(eventFactory.createCharacters(top + "."
+								+ cntC01 + "." + cntC02 + "." + cntC03 + "."
+								+ cntC04 + "." + cntC05 + "." + cntC06));
 					}
 					if (node.equals("c07")) {
-						writer.add(eventFactory.createCharacters(top + "." + cntC01
-								+ "." + cntC02 + "." + cntC03 + "." + cntC04 + "."
-								+ cntC05 + "." + cntC06 + "." + cntC07));
+						writer.add(eventFactory.createCharacters(top + "."
+								+ cntC01 + "." + cntC02 + "." + cntC03 + "."
+								+ cntC04 + "." + cntC05 + "." + cntC06 + "."
+								+ cntC07));
 					}
 					if (node.equals("c08")) {
-						writer.add(eventFactory.createCharacters(top + "." + cntC01
-								+ "." + cntC02 + "." + cntC03 + "." + cntC04 + "."
-								+ cntC05 + "." + cntC06 + "." + cntC07 + "."
-								+ cntC08));
+						writer.add(eventFactory.createCharacters(top + "."
+								+ cntC01 + "." + cntC02 + "." + cntC03 + "."
+								+ cntC04 + "." + cntC05 + "." + cntC06 + "."
+								+ cntC07 + "." + cntC08));
 					}
 					if (node.equals("c09")) {
-						writer.add(eventFactory.createCharacters(top + "." + cntC01
-								+ "." + cntC02 + "." + cntC03 + "." + cntC04 + "."
-								+ cntC05 + "." + cntC06 + "." + cntC07 + "."
-								+ cntC08 + "." + cntC09));
+						writer.add(eventFactory.createCharacters(top + "."
+								+ cntC01 + "." + cntC02 + "." + cntC03 + "."
+								+ cntC04 + "." + cntC05 + "." + cntC06 + "."
+								+ cntC07 + "." + cntC08 + "." + cntC09));
 					}
 					if (node.equals("c10")) {
-						writer.add(eventFactory.createCharacters(top + "." + cntC01
-								+ "." + cntC02 + "." + cntC03 + "." + cntC04 + "."
-								+ cntC05 + "." + cntC06 + "." + cntC07 + "."
-								+ cntC08 + "." + cntC09 + "." + cntC10));
+						writer.add(eventFactory.createCharacters(top + "."
+								+ cntC01 + "." + cntC02 + "." + cntC03 + "."
+								+ cntC04 + "." + cntC05 + "." + cntC06 + "."
+								+ cntC07 + "." + cntC08 + "." + cntC09 + "."
+								+ cntC10));
 					}
 					if (node.equals("c11")) {
-						writer.add(eventFactory.createCharacters(top + "." + cntC01
-								+ "." + cntC02 + "." + cntC03 + "." + cntC04 + "."
-								+ cntC05 + "." + cntC06 + "." + cntC07 + "."
-								+ cntC08 + "." + cntC09 + "." + cntC10 + "."
-								+ cntC11));
+						writer.add(eventFactory.createCharacters(top + "."
+								+ cntC01 + "." + cntC02 + "." + cntC03 + "."
+								+ cntC04 + "." + cntC05 + "." + cntC06 + "."
+								+ cntC07 + "." + cntC08 + "." + cntC09 + "."
+								+ cntC10 + "." + cntC11));
 					}
 					if (node.equals("c12")) {
-						writer.add(eventFactory.createCharacters(top + "." + cntC01
-								+ "." + cntC02 + "." + cntC03 + "." + cntC04 + "."
-								+ cntC05 + "." + cntC06 + "." + cntC07 + "."
-								+ cntC08 + "." + cntC09 + "." + cntC10 + "."
-								+ cntC11 + "." + cntC12));
+						writer.add(eventFactory.createCharacters(top + "."
+								+ cntC01 + "." + cntC02 + "." + cntC03 + "."
+								+ cntC04 + "." + cntC05 + "." + cntC06 + "."
+								+ cntC07 + "." + cntC08 + "." + cntC09 + "."
+								+ cntC10 + "." + cntC11 + "." + cntC12));
 					}
 					writer.add(eventFactory
 							.createEndElement("", null, "unitid"));
