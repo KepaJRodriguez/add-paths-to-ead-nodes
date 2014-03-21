@@ -50,23 +50,39 @@ public class App {
 		int cntC10 = -1;
 		int cntC11 = -1;
 		int cntC12 = -1;
-		String stop = "no";
-		String head = "no";
-
+		boolean toplevel = false;
+		boolean head = false;
+		
 		while (xmlEventReaderEAD.hasNext()) {
 			XMLEvent event = xmlEventReaderEAD.nextEvent();
 			writer.add(event);
+			
 			if (event.isStartElement()) {
 				if (event.asStartElement().getName().getLocalPart()
 						.equals("archdesc")) {
 					node = "topnode";
+					toplevel = true;
 				}
+			}
+			if (event.isStartElement()) {
+				if (event.asStartElement().getName().getLocalPart()
+						.equals("head")) {
+					head = true;
+				}
+			}
+			if (event.isEndElement()) {
+				if (event.asEndElement().getName().getLocalPart().equals("did")) {
+					toplevel = false;
+					head = false;
+				}
+
 			}
 			if (event.isStartElement()) {
 				if (event.asStartElement().getName().getLocalPart()
 						.equals("c01")) {
 					cntC01++;
 					node = "c01";
+					head = false;
 				}
 			}
 			if (event.isStartElement()) {
@@ -148,12 +164,7 @@ public class App {
 					cntC12++;
 				}
 			}
-			if (event.isEndElement()) {
-				if (event.asEndElement().getName().getLocalPart().equals("did")) {
-					stop = "yes";
-				}
-			}
-
+/*
 			if (event.isStartElement()) {
 				if (event.asStartElement().getName().getLocalPart()
 						.equals("archdesc")) {
@@ -172,13 +183,12 @@ public class App {
 					}
 					}
 				}
-			}
+			} */
 
 			if (event.isEndElement()) {
 				if (event.asEndElement().getName().getLocalPart()
 						.equals("head")) {
-					if (node.equals("topnode") && stop.equals("no")) {
-						head = "yes";
+					if (toplevel == true) {
 						writer.add(end);
 						writer.add(eventFactory.createStartElement("", null,
 								"unitid"));
@@ -193,12 +203,15 @@ public class App {
 			if (event.isStartElement()) {
 				if (event.asStartElement().getName().getLocalPart()
 						.equals("did")
-						&& !node.equals("topnode")) {
+						&&  head == false) {
 					writer.add(end);
 					writer.add(eventFactory.createStartElement("", null,
 							"unitid"));
 					writer.add(eventFactory.createAttribute("label",
 							"ehri_structure"));
+					if (toplevel == true) {
+						writer.add(eventFactory.createCharacters(top));
+					}
 					if (node.equals("c01")) {
 						writer.add(eventFactory.createCharacters(top + "."
 								+ cntC01));
@@ -328,6 +341,7 @@ public class App {
 			}
 		}
 		writer.close();
+		xmlEventReaderEAD.close();
 	}
 
 }
