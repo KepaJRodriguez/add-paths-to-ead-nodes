@@ -25,14 +25,14 @@ public class App {
 		String eadfile = args[0];
 		String outputfile = eadfile.replace(".xml", "_wpath.xml");
 
-		FileInputStream fileInputStreamEAD1 = new FileInputStream(eadfile);
+		FileInputStream fileInputStreamEAD = new FileInputStream(eadfile);
 		XMLOutputFactory factory = XMLOutputFactory.newInstance();
 		XMLEventWriter writer = factory.createXMLEventWriter(new FileWriter(
 				outputfile));
 		XMLEventFactory eventFactory = XMLEventFactory.newInstance();
 
-		XMLEventReader xmlEventReaderEAD1 = XMLInputFactory.newInstance()
-				.createXMLEventReader(fileInputStreamEAD1);
+		XMLEventReader xmlEventReaderEAD = XMLInputFactory.newInstance()
+				.createXMLEventReader(fileInputStreamEAD);
 
 		XMLEvent end = eventFactory.createDTD("\n");
 
@@ -53,8 +53,8 @@ public class App {
 		String stop = "no";
 		String head = "no";
 
-		while (xmlEventReaderEAD1.hasNext()) {
-			XMLEvent event = xmlEventReaderEAD1.nextEvent();
+		while (xmlEventReaderEAD.hasNext()) {
+			XMLEvent event = xmlEventReaderEAD.nextEvent();
 			writer.add(event);
 			if (event.isStartElement()) {
 				if (event.asStartElement().getName().getLocalPart()
@@ -157,7 +157,7 @@ public class App {
 			if (event.isStartElement()) {
 				if (event.asStartElement().getName().getLocalPart()
 						.equals("archdesc")) {
-					event =  xmlEventReaderEAD1.nextEvent();
+					event =  xmlEventReaderEAD.nextEvent();
 					if (event.isStartElement()) {
 					if (!event.asStartElement().getName().getLocalPart()
 					.equals("head")) {
