@@ -33,9 +33,11 @@ public class App {
 
 		XMLEventReader xmlEventReaderEAD = XMLInputFactory.newInstance()
 				.createXMLEventReader(fileInputStreamEAD);
-
+		
 		XMLEvent end = eventFactory.createDTD("\n");
 
+		boolean hashead = LookForHeadTag.hasHeadTag(eadfile);
+		
 		String node = "";
 		String top = "0";
 		int cntC01 = -1;
@@ -51,12 +53,12 @@ public class App {
 		int cntC11 = -1;
 		int cntC12 = -1;
 		boolean toplevel = false;
-		boolean head = false;
+
 		
 		while (xmlEventReaderEAD.hasNext()) {
 			XMLEvent event = xmlEventReaderEAD.nextEvent();
 			writer.add(event);
-			
+
 			if (event.isStartElement()) {
 				if (event.asStartElement().getName().getLocalPart()
 						.equals("archdesc")) {
@@ -64,25 +66,19 @@ public class App {
 					toplevel = true;
 				}
 			}
-			if (event.isStartElement()) {
-				if (event.asStartElement().getName().getLocalPart()
-						.equals("head")) {
-					head = true;
-				}
-			}
+			
+
 			if (event.isEndElement()) {
 				if (event.asEndElement().getName().getLocalPart().equals("did")) {
 					toplevel = false;
-					head = false;
 				}
-
 			}
 			if (event.isStartElement()) {
+
 				if (event.asStartElement().getName().getLocalPart()
 						.equals("c01")) {
 					cntC01++;
 					node = "c01";
-					head = false;
 				}
 			}
 			if (event.isStartElement()) {
@@ -164,54 +160,47 @@ public class App {
 					cntC12++;
 				}
 			}
-/*
-			if (event.isStartElement()) {
-				if (event.asStartElement().getName().getLocalPart()
-						.equals("archdesc")) {
-					event =  xmlEventReaderEAD.nextEvent();
-					if (event.isStartElement()) {
-					if (!event.asStartElement().getName().getLocalPart()
-					.equals("head")) {
-						writer.add(end);
-						writer.add(eventFactory.createStartElement("", null,
-								"unitid"));
-						writer.add(eventFactory.createAttribute("label",
-								"ehri_structure"));
-						writer.add(eventFactory.createCharacters(top));
-						writer.add(eventFactory.createEndElement("", null,
-								"unitid"));
-					}
-					}
-				}
-			} */
 
 			if (event.isEndElement()) {
 				if (event.asEndElement().getName().getLocalPart()
-						.equals("head")) {
-					if (toplevel == true) {
-						writer.add(end);
-						writer.add(eventFactory.createStartElement("", null,
-								"unitid"));
-						writer.add(eventFactory.createAttribute("label",
-								"ehri_structure"));
-						writer.add(eventFactory.createCharacters(top));
-						writer.add(eventFactory.createEndElement("", null,
-								"unitid"));
-					}
-				}
-			}
-			if (event.isStartElement()) {
-				if (event.asStartElement().getName().getLocalPart()
-						.equals("did")
-						&&  head == false) {
+						.equals("head")
+						&& toplevel == true) {
 					writer.add(end);
 					writer.add(eventFactory.createStartElement("", null,
 							"unitid"));
 					writer.add(eventFactory.createAttribute("label",
 							"ehri_structure"));
-					if (toplevel == true) {
-						writer.add(eventFactory.createCharacters(top));
-					}
+					writer.add(eventFactory.createCharacters(top));
+					writer.add(eventFactory
+							.createEndElement("", null, "unitid"));
+				}
+			}
+
+			if (event.isStartElement()) {
+				if (event.asStartElement().getName().getLocalPart()
+						.equals("did")
+						&& toplevel == true && hashead == false) {
+					writer.add(end);
+					writer.add(eventFactory.createStartElement("", null,
+							"unitid"));
+					writer.add(eventFactory.createAttribute("label",
+							"ehri_structure"));
+					writer.add(eventFactory.createCharacters(top));
+					writer.add(eventFactory
+							.createEndElement("", null, "unitid"));
+				}
+			}
+				
+			if (event.isStartElement()) {
+				if (event.asStartElement().getName().getLocalPart()
+						.equals("did")
+						&& toplevel == false) {
+
+					writer.add(end);
+					writer.add(eventFactory.createStartElement("", null,
+							"unitid"));
+					writer.add(eventFactory.createAttribute("label",
+							"ehri_structure"));
 					if (node.equals("c01")) {
 						writer.add(eventFactory.createCharacters(top + "."
 								+ cntC01));
